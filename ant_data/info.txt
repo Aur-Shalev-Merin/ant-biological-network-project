@@ -1,0 +1,24 @@
+colony	treatment	box	colony_size	Ynestmin	Ynestmax	nb_larvae	nb_pupae	colony_age
+112	control	71	54	0	1810	15	0	16
+20	pathogen	61	81	0	1850	55	1	16
+114	pathogen	52	117	0	2016	58	9	16
+122	pathogen	72	193	0	1968	68	5	16
+209	control	61	105	0	1842	27	14	5
+208	control	52	134	0	1980	37	33	5
+201	pathogen	72	148	0	2052	39	5	5
+213	control	102	103	0	1842	134	33	5
+215	pathogen	92	94	0	1908	66	0	5
+248	pathogen	61	113	0	1884	30	17	5
+250	pathogen	51	118	0	1902	56	9	5
+241	control	52	127	0	1932	43	12	5
+224	control	71	106	0	1850	74	15	6
+204	control	61	92	0	1902	38	0	6
+253	control	52	121	0	2016	62	24	6
+237	pathogen	61	145	0	1872	31	4	7
+261	control	62	92	0	1920	27	7	7
+260	pathogen	52	83	0	1938	10	9	7
+226	control	81	160	0	1860	27	13	7
+220	pathogen	91	145	0	1884	44	18	7
+265	control	92	105	0	1914	37	6	7
+276	pathogen	102	116	0	1914	115	13	7
+
