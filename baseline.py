@@ -1,6 +1,7 @@
 from pathlib import Path
 import numpy as np
 import networkx as nx
+from network_data import load_graphs
 
 DATA = Path("ant_data")
 colony = "colony276"
@@ -89,3 +90,23 @@ for period, fname in FILES:
     M, sizes = block_matrix_3(G, infected)
     print(period, "sizes (nurses, untreated foragers, treated foragers):", sizes)
     print(np.round(M, 3))
+
+def affinity_matrix(G, weighted=False):
+    """Observed / expected contacts between groups, given each group's total activity (1 = no preference)."""
+    names = ["nurse", "untreated", "treated"]
+    e = np.zeros((3, 3))
+    for a, b, d in G.edges(data=True):
+        w = d["weight"] if weighted else 1
+        i, j = names.index(G.nodes[a]["group"]), names.index(G.nodes[b]["group"])
+        e[i, j] += w
+        e[j, i] += w
+    k = e.sum(1)
+    return e / (np.outer(k, k) / k.sum())
+
+graphs = load_graphs("colony276")
+
+for period, G in graphs.items():
+    print(period, "(rows/cols: nurses, untreated foragers, treated foragers)")
+    print(np.round(affinity_matrix(G), 2))
+    print("weighted by contact time:")
+    print(np.round(affinity_matrix(G, weighted=True), 2))
