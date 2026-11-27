@@ -110,3 +110,19 @@ for period, G in graphs.items():
     print(np.round(affinity_matrix(G), 2))
     print("weighted by contact time:")
     print(np.round(affinity_matrix(G, weighted=True), 2))
+
+def degree_preserving_null(G, n_samples=250, seed=0):
+    """Yield randomized copies of G: every ant keeps its number of contacts, but who it touches is shuffled.
+    Group labels stay on the nodes. Edge weights are not kept, so use unweighted measures."""
+    m = G.number_of_edges()
+    for s in range(n_samples):
+        H = nx.Graph(G)
+        nx.double_edge_swap(H, nswap=10 * m, max_tries=100 * m, seed=seed + s)
+        yield H
+
+
+for period, G in load_graphs().items():
+    obs = affinity_matrix(G)    # your unweighted version
+    null = np.array([affinity_matrix(H) for H in degree_preserving_null(G)])
+    z = (obs - null.mean(0)) / null.std(0)
+    print(period, "z-scores\n", np.round(z, 1))
